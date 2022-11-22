@@ -1,6 +1,5 @@
 Module Program
     Sub Main(args As String())
-        Console.WriteLine("Swarms of SPLORR!!")
-        Console.ReadLine()
+        MainProcessor.Run()
     End Sub
 End Module

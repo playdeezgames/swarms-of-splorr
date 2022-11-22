@@ -4,6 +4,24 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SwarmsOfSPLORR</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
+    <OptionStrict>On</OptionStrict>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.45.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="Microsoft.Win32.SafeHandles" />
+    <Import Include="Spectre.Console" />
+  </ItemGroup>
 
 </Project>
