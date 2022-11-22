@@ -20,14 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="Microsoft.VisualBasic.FileIO" />
     <Import Include="Microsoft.Win32" />
     <Import Include="Microsoft.Win32.SafeHandles" />
-    <Import Include="SOS.Bidnez" />
+    <Import Include="SOS.Business" />
+    <Import Include="SOS.Data" />
     <Import Include="Spectre.Console" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SOS.Bidnez\SOS.Bidnez.csproj" />
+    <ProjectReference Include="..\SOS.Business\SOS.Business.vbproj" />
   </ItemGroup>
 
 </Project>
