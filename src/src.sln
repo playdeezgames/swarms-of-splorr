@@ -5,6 +5,12 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SwarmsOfSPLORR", "SwarmsOfSPLORR\SwarmsOfSPLORR.vbproj", "{48398F58-75A4-4D85-B268-BA2BC74A73FD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_STUFF", "_STUFF", "{E529C7F4-BFFD-495A-9DBB-C4C3FCFA5357}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		..\shippit.sh = ..\shippit.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
