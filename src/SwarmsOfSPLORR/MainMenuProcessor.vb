@@ -1,15 +1,13 @@
 ﻿Module MainMenuProcessor
     Friend Sub Run()
-StartOfLoop:
-        AnsiConsole.Clear()
-        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Main Menu:[/]"}
-        prompt.AddChoices(QuitText)
-        Select Case AnsiConsole.Prompt(prompt)
-            Case QuitText
-                GoTo DoneWithLoop
-        End Select
-        GoTo StartOfLoop
-
-DoneWithLoop:
+        Do
+            AnsiConsole.Clear()
+            Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Main Menu:[/]"}
+            prompt.AddChoices(QuitText)
+            Select Case AnsiConsole.Prompt(prompt)
+                Case QuitText
+                    Exit Do
+            End Select
+        Loop
     End Sub
 End Module
