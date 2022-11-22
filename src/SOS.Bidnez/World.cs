@@ -19,7 +19,9 @@ namespace SOS.Bidnez
                 Name = "Yer Swarm",
                 CharacterType = CharacterType.Swarm,
                 X=0.0,
-                Y=0.0
+                Y=0.0,
+                Heading = 0.0,
+                Speed = 1.0
             });
         }
     }

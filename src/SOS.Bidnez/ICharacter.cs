@@ -6,5 +6,7 @@
         string Name { get; }
         double X { get; }
         double Y { get; }
+        double Heading { get; }
+        double Speed { get; }
     }
 }
