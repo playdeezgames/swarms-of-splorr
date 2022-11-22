@@ -8,8 +8,10 @@
             AnsiConsole.MarkupLine($"Heading: {playerCharacter.Heading}")
             AnsiConsole.MarkupLine($"Speed: {playerCharacter.Speed}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-            prompt.AddChoices(ChangeHeadingText, AbandonGameText)
+            prompt.AddChoices(ChangeHeadingText, ChangeSpeedText, AbandonGameText)
             Select Case AnsiConsole.Prompt(prompt)
+                Case ChangeSpeedText
+                    ChangeSpeedProcessor.Run(world, playerCharacter)
                 Case ChangeHeadingText
                     ChangeHeadingProcessor.Run(world, playerCharacter)
                 Case AbandonGameText

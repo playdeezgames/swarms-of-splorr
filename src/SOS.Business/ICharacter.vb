@@ -4,5 +4,5 @@
     ReadOnly Property X As Double
     ReadOnly Property Y As Double
     Property Heading As Double
-    ReadOnly Property Speed As Double
+    Property Speed As Double
 End Interface

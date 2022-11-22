@@ -36,14 +36,17 @@
             Return _worldData.Characters(Id).Heading
         End Get
         Set(value As Double)
-            _worldData.Characters(Id).Heading = value
+            _worldData.Characters(Id).Heading = Math.Min(360.0, Math.Max(0.0, value))
         End Set
     End Property
 
-    Public ReadOnly Property Speed As Double Implements ICharacter.Speed
+    Public Property Speed As Double Implements ICharacter.Speed
         Get
             Return _worldData.Characters(Id).Speed
         End Get
+        Set(value As Double)
+            _worldData.Characters(Id).Speed = Math.Min(1.0, Math.Max(0.0, value))
+        End Set
     End Property
     Friend Shared Function FromId(worldData As WorldData, id As Integer?) As ICharacter
         Return If(id.HasValue, New Character(worldData, id.Value), Nothing)
