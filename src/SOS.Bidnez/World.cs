@@ -16,7 +16,7 @@ namespace SOS.Bidnez
             _worldData.PlayerCharacterId = _worldData.Characters.Count;
             _worldData.Characters.Add(new CharacterData()
             {
-                Name = "You"
+                Name = "Yer Swarm"
             });
         }
     }
