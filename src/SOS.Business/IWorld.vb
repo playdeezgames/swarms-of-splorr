@@ -1,4 +1,4 @@
 ﻿Public Interface IWorld
-    ReadOnly Property PlayerCharacter As ICharacter
+    ReadOnly Property PlayerEntity As IEntity
     Sub Start()
 End Interface

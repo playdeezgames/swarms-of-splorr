@@ -1,4 +1,4 @@
-﻿Public Class CharacterData
+﻿Public Class EntityData
     Property Name As String
     Property X As Double
     Property Y As Double
