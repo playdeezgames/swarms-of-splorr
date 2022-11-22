@@ -8,8 +8,10 @@
             AnsiConsole.MarkupLine($"Heading: {playerCharacter.Heading}")
             AnsiConsole.MarkupLine($"Speed: {playerCharacter.Speed}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-            prompt.AddChoice(AbandonGameText)
+            prompt.AddChoices(ChangeHeadingText, AbandonGameText)
             Select Case AnsiConsole.Prompt(prompt)
+                Case ChangeHeadingText
+                    ChangeHeadingProcessor.Run(world, playerCharacter)
                 Case AbandonGameText
                     If ConfirmProcessor.Run("[red]Are you sure you want to abandon this game?[/]") Then
                         Exit Do

@@ -22,9 +22,14 @@ namespace SOS.Bidnez
 
         public int Id => _id;
 
-        public double Heading => _worldData.Characters[_id].Heading;
 
         public double Speed => _worldData.Characters[_id].Speed;
+
+        double ICharacter.Heading 
+        { 
+            get => _worldData.Characters[_id].Heading; 
+            set => _worldData.Characters[_id].Heading=value; 
+        }
 
         internal static ICharacter? FromId(WorldData worldData, FSharpOption<int> id)
         {
