@@ -16,6 +16,12 @@ namespace SOS.Bidnez
 
         public string Name => _worldData.Characters[_id].Name;
 
+        public double X => _worldData.Characters[_id].X;
+
+        public double Y => _worldData.Characters[_id].Y;
+
+        public int Id => _id;
+
         internal static ICharacter? FromId(WorldData worldData, FSharpOption<int> id)
         {
             return (id is null) ? (null) : new Character(worldData, id.Value);

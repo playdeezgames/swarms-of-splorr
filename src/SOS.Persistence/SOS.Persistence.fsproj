@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CharacterType.fs" />
     <Compile Include="CharacterData.fs" />
     <Compile Include="WorldData.fs" />
   </ItemGroup>
