@@ -1,7 +1,7 @@
 ﻿Public Class Character
     Implements ICharacter
-    Private _id As Integer
-    Private _worldData As WorldData
+    Private ReadOnly _id As Integer
+    Private ReadOnly _worldData As WorldData
     Sub New(worldData As WorldData, id As Integer)
         _worldData = worldData
         _id = id
