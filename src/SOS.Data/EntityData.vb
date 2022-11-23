@@ -4,4 +4,5 @@
     Property Y As Double
     Property Heading As Double
     Property Speed As Double
+    Property MaximumSpeed As Double
 End Class

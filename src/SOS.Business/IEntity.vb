@@ -5,6 +5,7 @@
     ReadOnly Property Y As Double
     Property Heading As Double
     Property Speed As Double
+    ReadOnly Property MaximumSpeed As Double
     ReadOnly Property IsPlayer As Boolean
     Sub Move()
     Sub AddMessage(text As String)

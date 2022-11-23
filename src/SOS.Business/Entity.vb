@@ -45,7 +45,7 @@
             Return _worldData.Entities(Id).Speed
         End Get
         Set(value As Double)
-            _worldData.Entities(Id).Speed = Math.Min(1.0, Math.Max(0.0, value))
+            _worldData.Entities(Id).Speed = Math.Min(MaximumSpeed, Math.Max(0.0, value))
         End Set
     End Property
 
@@ -61,6 +61,12 @@
                 Return _worldData.Messages
             End If
             Return Array.Empty(Of String)
+        End Get
+    End Property
+
+    Public ReadOnly Property MaximumSpeed As Double Implements IEntity.MaximumSpeed
+        Get
+            Return _worldData.Entities(Id).MaximumSpeed
         End Get
     End Property
 

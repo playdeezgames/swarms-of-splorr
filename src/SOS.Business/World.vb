@@ -24,7 +24,16 @@ Public Class World
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         _worldData.PlayerCharacterId = _worldData.Entities.Count
-        _worldData.Entities.Add(New EntityData() With {.Name = "Yer Swarm", .X = 0.0, .Y = 0.0, .Heading = 0.0, .Speed = 1.0})
+        _worldData.Entities.Add(
+            New EntityData() With
+            {
+                .Name = "Yer Swarm",
+                .X = 0.0,
+                .Y = 0.0,
+                .Heading = 0.0,
+                .Speed = 1.0,
+                .MaximumSpeed = 1.0
+            })
     End Sub
 
     Public Sub Abandon() Implements IWorld.Abandon
