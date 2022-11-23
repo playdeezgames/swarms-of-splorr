@@ -4,19 +4,26 @@
             AnsiConsole.Clear()
             ShowMessages(entity)
             ShowVisibleEnemies(world, entity)
-            ShowAttackableEnemies(world, entity)
+            Dim canAttack = ShowAttackableEnemies(world, entity)
             AnsiConsole.MarkupLine($"Name: {entity.Name}")
             AnsiConsole.MarkupLine($"Location: ({entity.X.ToString("0.00")},{entity.Y.ToString("0.00")})")
             AnsiConsole.MarkupLine($"Heading: {entity.Heading.ToString("0.00")}")
             AnsiConsole.MarkupLine($"Speed: {entity.Speed.ToString("0.00")}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-            prompt.AddChoices(MoveText, ChangeHeadingText, ChangeSpeedText, AbandonGameText)
+            prompt.AddChoice(MoveText)
+            If canAttack Then
+                prompt.AddChoice(AttackText)
+            End If
+            prompt.AddChoices(ChangeHeadingText, ChangeSpeedText, AbandonGameText)
             Select Case AnsiConsole.Prompt(prompt)
                 Case AbandonGameText
                     If ConfirmProcessor.Run("[red]Are you sure you want to abandon this game?[/]") Then
                         world.Abandon()
                         Exit Do
                     End If
+                Case AttackText
+                    AttackProcessor.Run(world, entity)
+                    Exit Do
                 Case ChangeHeadingText
                     ChangeHeadingProcessor.Run(world, entity)
                 Case ChangeSpeedText
@@ -39,7 +46,7 @@
         End If
     End Sub
 
-    Private Sub ShowAttackableEnemies(world As IWorld, entity As IEntity)
+    Private Function ShowAttackableEnemies(world As IWorld, entity As IEntity) As Boolean
         Dim attackableEnemies = world.AttackableEnemiesOf(entity)
         If attackableEnemies.Any Then
             AnsiConsole.MarkupLine("[red]Attackable Enemies:[/]")
@@ -47,8 +54,10 @@
                 AnsiConsole.MarkupLine($"- {enemy.Name} (Distance: {enemy.DistanceFrom(entity).ToString("0.00")}, Heading: {entity.HeadingTo(enemy).ToString("0.00")})")
             Next
             AnsiConsole.WriteLine()
+            Return True
         End If
-    End Sub
+        Return False
+    End Function
 
     Private Sub ShowMessages(entity As IEntity)
         Dim messages = entity.Messages

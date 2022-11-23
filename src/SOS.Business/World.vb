@@ -13,7 +13,7 @@ Public Class World
             Dim result As New List(Of IEntity)
             For entityId = 0 To _worldData.Entities.Count - 1
                 Dim entity = Business.Entity.FromId(_worldData, entityId)
-                If entity IsNot Nothing Then
+                If entity.Exists Then
                     result.Add(entity)
                 End If
             Next
@@ -86,7 +86,7 @@ Public Class World
         _worldData.Entities.Add(
             New EntityData() With
             {
-                .Name = "You",
+                .Name = "Yer Character",
                 .X = 0.0,
                 .Y = 0.0,
                 .Heading = 0.0,

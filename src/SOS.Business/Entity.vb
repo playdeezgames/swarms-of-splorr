@@ -95,6 +95,15 @@
             _worldData.Messages.Clear()
         End If
     End Sub
+
+    Public Sub Attack(enemy As IEntity) Implements IEntity.Attack
+        enemy.Destroy()
+    End Sub
+
+    Public Sub Destroy() Implements IEntity.Destroy
+        _worldData.Entities(Id) = Nothing
+    End Sub
+
     Friend Shared Function FromId(worldData As WorldData, id As Integer?) As IEntity
         Return If(id.HasValue, New Entity(worldData, id.Value), Nothing)
     End Function
@@ -107,5 +116,9 @@
         Dim deltaY = other.Y - Y
         Dim result = Math.Atan2(deltaY, deltaX) * 180.0 / Math.PI
         Return If(result < 0.0, result + 360.0, result)
+    End Function
+
+    Public Function Exists() As Boolean Implements IEntity.Exists
+        Return _worldData.Entities(Id) IsNot Nothing
     End Function
 End Class

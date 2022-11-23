@@ -8,7 +8,9 @@
     Friend Sub Run(world As IWorld)
         While world.PlayerEntity IsNot Nothing
             For Each entity In world.Entities
-                table(entity.EntityType)(world, entity)
+                If entity.Exists Then
+                    table(entity.EntityType)(world, entity)
+                End If
             Next
         End While
     End Sub

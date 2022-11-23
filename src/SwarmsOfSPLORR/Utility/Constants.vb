@@ -1,5 +1,6 @@
 ﻿Module Constants
     Friend Const AbandonGameText = "Abandon Game"
+    Friend Const AttackText = "Attack..."
     Friend Const ChangeHeadingText = "Change Heading..."
     Friend Const ChangeSpeedText = "Change Speed..."
     Friend Const MoveText = "Move"
