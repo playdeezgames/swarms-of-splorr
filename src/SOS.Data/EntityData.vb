@@ -6,4 +6,5 @@
     Property Speed As Double
     Property MaximumSpeed As Double
     Property SightRadius As Double
+    Property EntityType As EntityType
 End Class

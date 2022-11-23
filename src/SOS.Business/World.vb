@@ -54,7 +54,8 @@ Public Class World
                 .Heading = 0.0,
                 .Speed = 0.0,
                 .MaximumSpeed = 1.0,
-                .SightRadius = Double.MaxValue
+                .SightRadius = Double.MaxValue,
+                .EntityType = EntityType.Enemy
             })
             distance += distanceStep
         Next
@@ -71,7 +72,8 @@ Public Class World
                 .Heading = 0.0,
                 .Speed = 1.0,
                 .MaximumSpeed = 1.0,
-                .SightRadius = 10.0
+                .SightRadius = 10.0,
+                .EntityType = EntityType.Player
             })
     End Sub
 
