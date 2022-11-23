@@ -49,6 +49,12 @@
         End Set
     End Property
 
+    Public ReadOnly Property IsPlayer As Boolean Implements IEntity.IsPlayer
+        Get
+            Return _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = _id
+        End Get
+    End Property
+
     Public Sub Move() Implements IEntity.Move
         _worldData.Characters(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Characters(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)

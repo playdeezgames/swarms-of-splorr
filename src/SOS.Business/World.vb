@@ -8,9 +8,26 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property Entities As IEnumerable(Of IEntity) Implements IWorld.Entities
+        Get
+            Dim result As New List(Of IEntity)
+            For entityId = 0 To _worldData.Characters.Count - 1
+                Dim entity = Business.Entity.FromId(_worldData, entityId)
+                If entity IsNot Nothing Then
+                    result.Add(entity)
+                End If
+            Next
+            Return result
+        End Get
+    End Property
+
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         _worldData.PlayerCharacterId = _worldData.Characters.Count
         _worldData.Characters.Add(New EntityData() With {.Name = "Yer Swarm", .X = 0.0, .Y = 0.0, .Heading = 0.0, .Speed = 1.0})
+    End Sub
+
+    Public Sub Abandon() Implements IWorld.Abandon
+        _worldData.PlayerCharacterId = Nothing
     End Sub
 End Class
