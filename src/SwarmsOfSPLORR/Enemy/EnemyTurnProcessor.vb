@@ -1,4 +1,4 @@
-﻿Module TurnProcessor
+﻿Module EnemyTurnProcessor
     Friend Sub Run(world As IWorld, entity As IEntity)
         Dim target = world.PlayerEntity
         If target Is Nothing Then Return

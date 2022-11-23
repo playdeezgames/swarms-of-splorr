@@ -29,7 +29,20 @@ Public Class World
 
     Public ReadOnly Property EnemiesOf(entity As IEntity) As IEnumerable(Of IEntity) Implements IWorld.EnemiesOf
         Get
-            Return Entities.Where(Function(x) x.IsPlayer <> entity.IsPlayer)
+            Select Case entity.EntityType
+                Case EntityType.Player
+                    Return EntitiesOfType(EntityType.Enemy)
+                Case EntityType.Enemy
+                    Return EntitiesOfType(EntityType.Player)
+                Case Else
+                    Return Array.Empty(Of IEntity)
+            End Select
+        End Get
+    End Property
+
+    Public ReadOnly Property EntitiesOfType(entityType As EntityType) As IEnumerable(Of IEntity) Implements IWorld.EntitiesOfType
+        Get
+            Return Entities.Where(Function(x) x.EntityType = entityType)
         End Get
     End Property
 

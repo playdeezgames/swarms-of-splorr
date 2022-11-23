@@ -14,4 +14,5 @@
     ReadOnly Property SightRadius As Double
     Function DistanceFrom(other As IEntity) As Double
     Function HeadingTo(other As IEntity) As Double
+    ReadOnly Property EntityType As EntityType
 End Interface
