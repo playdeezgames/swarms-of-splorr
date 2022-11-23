@@ -7,4 +7,7 @@
     Property Speed As Double
     ReadOnly Property IsPlayer As Boolean
     Sub Move()
+    Sub AddMessage(text As String)
+    Sub ClearMessages()
+    ReadOnly Property Messages As IEnumerable(Of String)
 End Interface

@@ -2,6 +2,15 @@
     Friend Sub Run(world As IWorld, entity As IEntity)
         Do
             AnsiConsole.Clear()
+            Dim messages = entity.Messages
+            If messages.Any Then
+                AnsiConsole.MarkupLine("[blue]Messages:[/]")
+                For Each message In messages
+                    AnsiConsole.MarkupLine($"- {message}")
+                Next
+                AnsiConsole.WriteLine()
+                entity.ClearMessages()
+            End If
             AnsiConsole.MarkupLine($"Name: {entity.Name}")
             AnsiConsole.MarkupLine($"Location: ({entity.X},{entity.Y})")
             AnsiConsole.MarkupLine($"Heading: {entity.Heading}")
