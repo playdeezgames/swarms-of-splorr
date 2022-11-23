@@ -75,7 +75,10 @@ Public Class World
                 .MaximumSpeed = 1.0,
                 .SightRadius = Double.MaxValue,
                 .EntityType = EntityType.Enemy,
-                .AttackRadius = 1.0
+                .AttackRadius = 1.0,
+                .MaximumDamage = 1.0,
+                .MaximumHealth = 10.0,
+                .Wounds = 0.0
             })
             distance += distanceStep
         Next
@@ -94,7 +97,10 @@ Public Class World
                 .MaximumSpeed = 1.0,
                 .SightRadius = 10.0,
                 .EntityType = EntityType.Player,
-                .AttackRadius = 1.0
+                .AttackRadius = 1.0,
+                .MaximumDamage = 1.0,
+                .MaximumHealth = 10.0,
+                .Wounds = 0.0
             })
     End Sub
 

@@ -8,4 +8,7 @@
     Property SightRadius As Double
     Property EntityType As EntityType
     Property AttackRadius As Double
+    Property MaximumDamage As Double
+    Property Wounds As Double
+    Property MaximumHealth As Double
 End Class

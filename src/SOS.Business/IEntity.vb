@@ -19,4 +19,9 @@
     Sub Attack(enemy As IEntity)
     Sub Destroy()
     Function Exists() As Boolean
+    Sub AddWounds(wounds As Double)
+    ReadOnly Property MaximumDamage As Double
+    ReadOnly Property IsDead As Boolean
+    ReadOnly Property Health As Double
+    ReadOnly Property MaximumHealth As Double
 End Interface

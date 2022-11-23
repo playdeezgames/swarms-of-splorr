@@ -9,6 +9,7 @@
             AnsiConsole.MarkupLine($"Location: ({entity.X.ToString("0.00")},{entity.Y.ToString("0.00")})")
             AnsiConsole.MarkupLine($"Heading: {entity.Heading.ToString("0.00")}")
             AnsiConsole.MarkupLine($"Speed: {entity.Speed.ToString("0.00")}")
+            AnsiConsole.MarkupLine($"Health: {entity.Health.ToString("0.00")}/{entity.MaximumHealth.ToString("0.00")}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
             prompt.AddChoice(MoveText)
             If canAttack Then

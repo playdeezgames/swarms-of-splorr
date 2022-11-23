@@ -80,6 +80,30 @@
         End Get
     End Property
 
+    Public ReadOnly Property MaximumDamage As Double Implements IEntity.MaximumDamage
+        Get
+            Return _worldData.Entities(Id).MaximumDamage
+        End Get
+    End Property
+
+    Public ReadOnly Property IsDead As Boolean Implements IEntity.IsDead
+        Get
+            Return Health = 0.0
+        End Get
+    End Property
+
+    Public ReadOnly Property Health As Double Implements IEntity.Health
+        Get
+            Return Math.Max(MaximumHealth - _worldData.Entities(Id).Wounds, 0.0)
+        End Get
+    End Property
+
+    Public ReadOnly Property MaximumHealth As Double Implements IEntity.MaximumHealth
+        Get
+            Return _worldData.Entities(Id).MaximumHealth
+        End Get
+    End Property
+
     Public Sub Move() Implements IEntity.Move
         _worldData.Entities(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Entities(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)
@@ -97,8 +121,24 @@
     End Sub
 
     Public Sub Attack(enemy As IEntity) Implements IEntity.Attack
-        enemy.Destroy()
+        AddMessage($"{Name} attacks {enemy.Name}!")
+        enemy.AddMessage($"{enemy.Name} is attacked by {Name}!")
+        Dim damage = RollDamage()
+        AddMessage($"{Name} does {damage.ToString("0.00")} damage to {enemy.Name}")
+        enemy.AddMessage($"{enemy.Name} takes {damage.ToString("0.00")} damage from {Name}")
+        enemy.AddWounds(damage)
+        If enemy.IsDead Then
+            AddMessage($"{Name} destroys {enemy.Name}.")
+            enemy.Destroy()
+        Else
+            AddMessage($"{enemy.Name} has {enemy.Health} health remaining.")
+            enemy.AddMessage($"{enemy.Name} has {enemy.Health} health remaining.")
+        End If
     End Sub
+
+    Private Function RollDamage() As Double
+        Return RNG.Roll(MaximumDamage)
+    End Function
 
     Public Sub Destroy() Implements IEntity.Destroy
         _worldData.Entities(Id) = Nothing
@@ -121,4 +161,8 @@
     Public Function Exists() As Boolean Implements IEntity.Exists
         Return _worldData.Entities(Id) IsNot Nothing
     End Function
+
+    Public Sub AddWounds(wounds As Double) Implements IEntity.AddWounds
+        _worldData.Entities(Id).Wounds = _worldData.Entities(Id).Wounds + wounds
+    End Sub
 End Class
