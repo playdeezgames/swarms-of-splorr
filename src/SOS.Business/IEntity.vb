@@ -11,4 +11,7 @@
     Sub AddMessage(text As String)
     Sub ClearMessages()
     ReadOnly Property Messages As IEnumerable(Of String)
+    ReadOnly Property SightRadius As Double
+    Function DistanceFrom(other As IEntity) As Double
+    Function HeadingTo(other As IEntity) As Double
 End Interface
