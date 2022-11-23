@@ -46,6 +46,12 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property AttackableEnemiesOf(entity As IEntity) As IEnumerable(Of IEntity) Implements IWorld.AttackableEnemiesOf
+        Get
+            Return EnemiesOf(entity).Where(Function(x) x.DistanceFrom(entity) <= entity.AttackRadius)
+        End Get
+    End Property
+
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         CreatePlayerEntity()
@@ -68,7 +74,8 @@ Public Class World
                 .Speed = 0.0,
                 .MaximumSpeed = 1.0,
                 .SightRadius = Double.MaxValue,
-                .EntityType = EntityType.Enemy
+                .EntityType = EntityType.Enemy,
+                .AttackRadius = 1.0
             })
             distance += distanceStep
         Next
@@ -86,7 +93,8 @@ Public Class World
                 .Speed = 1.0,
                 .MaximumSpeed = 1.0,
                 .SightRadius = 10.0,
-                .EntityType = EntityType.Player
+                .EntityType = EntityType.Player,
+                .AttackRadius = 1.0
             })
     End Sub
 

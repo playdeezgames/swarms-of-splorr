@@ -15,4 +15,5 @@
     Function DistanceFrom(other As IEntity) As Double
     Function HeadingTo(other As IEntity) As Double
     ReadOnly Property EntityType As EntityType
+    ReadOnly Property AttackRadius As Double
 End Interface

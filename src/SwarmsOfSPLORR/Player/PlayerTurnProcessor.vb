@@ -3,14 +3,8 @@
         Do
             AnsiConsole.Clear()
             ShowMessages(entity)
-            Dim visibleEnemies = world.VisibleEnemiesOf(entity)
-            If visibleEnemies.Any Then
-                AnsiConsole.MarkupLine("[red]Visible Enemies:[/]")
-                For Each enemy In visibleEnemies
-                    AnsiConsole.MarkupLine($"- {enemy.Name} (Distance: {enemy.DistanceFrom(entity).ToString("0.00")}, Heading: {entity.HeadingTo(enemy).ToString("0.00")})")
-                Next
-                AnsiConsole.WriteLine()
-            End If
+            ShowVisibleEnemies(world, entity)
+            ShowAttackableEnemies(world, entity)
             AnsiConsole.MarkupLine($"Name: {entity.Name}")
             AnsiConsole.MarkupLine($"Location: ({entity.X.ToString("0.00")},{entity.Y.ToString("0.00")})")
             AnsiConsole.MarkupLine($"Heading: {entity.Heading.ToString("0.00")}")
@@ -32,6 +26,28 @@
                     Exit Do
             End Select
         Loop
+    End Sub
+
+    Private Sub ShowVisibleEnemies(world As IWorld, entity As IEntity)
+        Dim visibleEnemies = world.VisibleEnemiesOf(entity)
+        If visibleEnemies.Any Then
+            AnsiConsole.MarkupLine("[red]Visible Enemies:[/]")
+            For Each enemy In visibleEnemies
+                AnsiConsole.MarkupLine($"- {enemy.Name} (Distance: {enemy.DistanceFrom(entity).ToString("0.00")}, Heading: {entity.HeadingTo(enemy).ToString("0.00")})")
+            Next
+            AnsiConsole.WriteLine()
+        End If
+    End Sub
+
+    Private Sub ShowAttackableEnemies(world As IWorld, entity As IEntity)
+        Dim attackableEnemies = world.AttackableEnemiesOf(entity)
+        If attackableEnemies.Any Then
+            AnsiConsole.MarkupLine("[red]Attackable Enemies:[/]")
+            For Each enemy In attackableEnemies
+                AnsiConsole.MarkupLine($"- {enemy.Name} (Distance: {enemy.DistanceFrom(entity).ToString("0.00")}, Heading: {entity.HeadingTo(enemy).ToString("0.00")})")
+            Next
+            AnsiConsole.WriteLine()
+        End If
     End Sub
 
     Private Sub ShowMessages(entity As IEntity)

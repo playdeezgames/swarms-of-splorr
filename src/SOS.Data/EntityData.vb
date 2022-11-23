@@ -7,4 +7,5 @@
     Property MaximumSpeed As Double
     Property SightRadius As Double
     Property EntityType As EntityType
+    Property AttackRadius As Double
 End Class

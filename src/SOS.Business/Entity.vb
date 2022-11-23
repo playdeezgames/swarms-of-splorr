@@ -74,6 +74,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property AttackRadius As Double Implements IEntity.AttackRadius
+        Get
+            Return _worldData.Entities(Id).AttackRadius
+        End Get
+    End Property
+
     Public Sub Move() Implements IEntity.Move
         _worldData.Entities(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Entities(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)
