@@ -212,5 +212,14 @@
     Private Sub AddXP(xpValue As Double)
         _worldData.Entities(Id).XPValue += xpValue
         AddMessage($"{Name} gains {xpValue.ToString("0.00")} xp!")
+        While XPLevel >= XPGoal
+            AddXPLevel()
+        End While
+    End Sub
+
+    Private Sub AddXPLevel()
+        _worldData.Entities(Id).XPValue -= XPGoal
+        AddMessage($"{Name} gains a level!")
+        _worldData.Entities(Id).Wounds = 0.0
     End Sub
 End Class
