@@ -25,5 +25,7 @@
     ReadOnly Property Health As Double
     ReadOnly Property MaximumHealth As Double
     ReadOnly Property XPValue As Double
+    ReadOnly Property XPGoal As Double
+    ReadOnly Property XPLevel As Integer
     Sub Take(powerUp As IEntity)
 End Interface

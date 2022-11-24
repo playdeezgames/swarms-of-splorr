@@ -12,4 +12,5 @@
     Property Wounds As Double
     Property MaximumHealth As Double
     Property XPValue As Double
+    Property XPLevel As Integer
 End Class

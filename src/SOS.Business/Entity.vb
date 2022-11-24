@@ -112,6 +112,19 @@
         End Get
     End Property
 
+    Const XPLevelMultiplier = 10.0
+    Public ReadOnly Property XPGoal As Double Implements IEntity.XPGoal
+        Get
+            Return XPLevelMultiplier * (XPLevel + 1)
+        End Get
+    End Property
+
+    Public ReadOnly Property XPLevel As Integer Implements IEntity.XPLevel
+        Get
+            Return _worldData.Entities(Id).XPLevel
+        End Get
+    End Property
+
     Public Sub Move() Implements IEntity.Move
         _worldData.Entities(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Entities(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)
