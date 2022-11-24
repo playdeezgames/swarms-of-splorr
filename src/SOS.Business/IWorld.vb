@@ -7,4 +7,5 @@
     ReadOnly Property VisibleEnemiesOf(entity As IEntity) As IEnumerable(Of IEntity)
     ReadOnly Property AttackableEnemiesOf(entity As IEntity) As IEnumerable(Of IEntity)
     ReadOnly Property EnemiesOf(entity As IEntity) As IEnumerable(Of IEntity)
+    Function CreateEntity(entityData As EntityData) As Integer
 End Interface

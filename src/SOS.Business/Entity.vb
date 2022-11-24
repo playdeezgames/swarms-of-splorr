@@ -2,7 +2,9 @@
     Implements IEntity
     Private ReadOnly _id As Integer
     Private ReadOnly _worldData As WorldData
-    Sub New(worldData As WorldData, id As Integer)
+    Private ReadOnly _world As IWorld
+    Sub New(world As IWorld, worldData As WorldData, id As Integer)
+        _world = world
         _worldData = worldData
         _id = id
     End Sub
@@ -141,14 +143,19 @@
     End Function
 
     Public Sub Destroy() Implements IEntity.Destroy
+        _world.CreateEntity(New EntityData() With
+                            {
+                                .Name = "XP",
+                                .EntityType = EntityType.XP
+                            })
         _worldData.Entities(Id) = Nothing
         If _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = Id Then
             _worldData.PlayerCharacterId = Nothing
         End If
     End Sub
 
-    Friend Shared Function FromId(worldData As WorldData, id As Integer?) As IEntity
-        Return If(id.HasValue, New Entity(worldData, id.Value), Nothing)
+    Friend Shared Function FromId(world As IWorld, worldData As WorldData, id As Integer?) As IEntity
+        Return If(id.HasValue, New Entity(world, worldData, id.Value), Nothing)
     End Function
     Public Function DistanceFrom(other As IEntity) As Double Implements IEntity.DistanceFrom
         Return Math.Sqrt((X - other.X) * (X - other.X) + (Y - other.Y) * (Y - other.Y))

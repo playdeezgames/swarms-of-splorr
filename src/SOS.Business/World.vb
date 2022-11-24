@@ -4,7 +4,7 @@ Public Class World
 
     Public ReadOnly Property PlayerEntity As IEntity Implements IWorld.PlayerEntity
         Get
-            Return Entity.FromId(_worldData, _worldData.PlayerCharacterId)
+            Return Entity.FromId(Me, _worldData, _worldData.PlayerCharacterId)
         End Get
     End Property
 
@@ -12,7 +12,7 @@ Public Class World
         Get
             Dim result As New List(Of IEntity)
             For entityId = 0 To _worldData.Entities.Count - 1
-                Dim entity = Business.Entity.FromId(_worldData, entityId)
+                Dim entity = Business.Entity.FromId(Me, _worldData, entityId)
                 If entity.Exists Then
                     result.Add(entity)
                 End If
@@ -64,7 +64,7 @@ Public Class World
         Dim random As New Random
         For index = 1 To 100
             Dim heading = random.NextDouble * Math.PI * 2
-            _worldData.Entities.Add(
+            CreateEntity(
             New EntityData() With
             {
                 .Name = $"Enemy #{index}",
@@ -85,8 +85,7 @@ Public Class World
     End Sub
 
     Private Sub CreatePlayerEntity()
-        _worldData.PlayerCharacterId = _worldData.Entities.Count
-        _worldData.Entities.Add(
+        _worldData.PlayerCharacterId = CreateEntity(
             New EntityData() With
             {
                 .Name = "Yer Character",
@@ -107,4 +106,15 @@ Public Class World
     Public Sub Abandon() Implements IWorld.Abandon
         _worldData.PlayerCharacterId = Nothing
     End Sub
+
+    Public Function CreateEntity(entityData As EntityData) As Integer Implements IWorld.CreateEntity
+        Dim index = _worldData.Entities.FindIndex(0, Function(x) x Is Nothing)
+        If index = -1 Then
+            index = _worldData.Entities.Count
+            _worldData.Entities.Add(entityData)
+        Else
+            _worldData.Entities(index) = entityData
+        End If
+        Return index
+    End Function
 End Class
