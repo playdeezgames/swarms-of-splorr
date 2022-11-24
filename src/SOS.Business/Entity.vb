@@ -149,7 +149,9 @@
     End Function
 
     Public Sub Destroy() Implements IEntity.Destroy
-        _world.CreateEntity(New EntityData() With
+        Select Case _worldData.Entities(Id).EntityType
+            Case EntityType.Enemy
+                _world.CreateEntity(New EntityData() With
                             {
                                 .Name = "XP",
                                 .EntityType = EntityType.XP,
@@ -157,6 +159,7 @@
                                 .X = X,
                                 .Y = Y
                             })
+        End Select
         _worldData.Entities(Id) = Nothing
         If _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = Id Then
             _worldData.PlayerCharacterId = Nothing
@@ -183,5 +186,18 @@
 
     Public Sub AddWounds(wounds As Double) Implements IEntity.AddWounds
         _worldData.Entities(Id).Wounds = _worldData.Entities(Id).Wounds + wounds
+    End Sub
+
+    Public Sub Take(powerUp As IEntity) Implements IEntity.Take
+        Select Case powerUp.EntityType
+            Case EntityType.XP
+                AddXP(powerUp.XPValue)
+                powerUp.Destroy()
+        End Select
+    End Sub
+
+    Private Sub AddXP(xpValue As Double)
+        _worldData.Entities(Id).XPValue += xpValue
+        AddMessage($"{Name} gains {xpValue.ToString("0.00")} xp!")
     End Sub
 End Class

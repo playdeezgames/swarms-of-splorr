@@ -12,10 +12,14 @@
             AnsiConsole.MarkupLine($"Heading: {entity.Heading.ToString("0.00")}")
             AnsiConsole.MarkupLine($"Speed: {entity.Speed.ToString("0.00")}")
             AnsiConsole.MarkupLine($"Health: {entity.Health.ToString("0.00")}/{entity.MaximumHealth.ToString("0.00")}")
+            AnsiConsole.MarkupLine($"XP: {entity.XPValue.ToString("0.00")}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
             prompt.AddChoice(NextTurnText)
             If canAttack Then
                 prompt.AddChoice(AttackText)
+            End If
+            If canTake Then
+                prompt.AddChoice(TakeText)
             End If
             prompt.AddChoices(ChangeHeadingText, ChangeSpeedText, AbandonGameText)
             Select Case AnsiConsole.Prompt(prompt)
@@ -34,11 +38,13 @@
                 Case NextTurnText
                     MoveProcessor.Run(world, entity)
                     Exit Do
+                Case TakeText
+                    TakeProcessor.Run(world, entity)
             End Select
         Loop
     End Sub
 
-    Private Function ShowTakeablePowerUps(world As IWorld, entity As IEntity) As Object
+    Private Function ShowTakeablePowerUps(world As IWorld, entity As IEntity) As Boolean
         Dim powerUps = world.TakeablePowerUps(entity)
         If powerUps.Any Then
             AnsiConsole.MarkupLine("[green]Takeable Power-Ups:[/]")

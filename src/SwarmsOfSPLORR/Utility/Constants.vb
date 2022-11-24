@@ -8,5 +8,6 @@
     Friend Const OkText = "Ok"
     Friend Const QuitText = "Quit"
     Friend Const StartText = "Start"
+    Friend Const TakeText = "Take..."
     Friend Const YesText = "Yes"
 End Module
