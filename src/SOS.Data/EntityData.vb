@@ -13,4 +13,5 @@
     Property MaximumHealth As Double
     Property XPValue As Double
     Property XPLevel As Integer
+    Public Property RestBenefit As Double
 End Class

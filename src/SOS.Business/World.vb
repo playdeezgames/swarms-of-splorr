@@ -112,7 +112,8 @@ Public Class World
                 .AttackRadius = 1.0,
                 .MaximumDamage = 1.0,
                 .MaximumHealth = 10.0,
-                .Wounds = 0.0
+                .Wounds = 0.0,
+                .RestBenefit = 1.0
             })
     End Sub
 

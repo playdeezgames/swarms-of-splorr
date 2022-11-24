@@ -14,14 +14,16 @@
             AnsiConsole.MarkupLine($"Health: {entity.Health.ToString("0.00")}/{entity.MaximumHealth.ToString("0.00")}")
             AnsiConsole.MarkupLine($"XP: {entity.XPValue.ToString("0.00")}/{entity.XPGoal.ToString("0.00")}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-            prompt.AddChoice(NextTurnText)
+            If entity.Speed > 0.0 Then
+                prompt.AddChoice(NextTurnText)
+            End If
             If canAttack Then
                 prompt.AddChoice(AttackText)
             End If
             If canTake Then
                 prompt.AddChoice(TakeText)
             End If
-            prompt.AddChoices(ChangeHeadingText, ChangeSpeedText, AbandonGameText)
+            prompt.AddChoices(RestText, ChangeHeadingText, ChangeSpeedText, AbandonGameText)
             Select Case AnsiConsole.Prompt(prompt)
                 Case AbandonGameText
                     If ConfirmProcessor.Run("[red]Are you sure you want to abandon this game?[/]") Then
@@ -37,6 +39,9 @@
                     ChangeSpeedProcessor.Run(world, entity)
                 Case NextTurnText
                     MoveProcessor.Run(world, entity)
+                    Exit Do
+                Case RestText
+                    RestProcessor.Run(world, entity)
                     Exit Do
                 Case TakeText
                     TakeProcessor.Run(world, entity)

@@ -28,4 +28,6 @@
     ReadOnly Property XPGoal As Double
     ReadOnly Property XPLevel As Integer
     Sub Take(powerUp As IEntity)
+    Sub Rest()
+    ReadOnly Property RestBenefit As Double
 End Interface

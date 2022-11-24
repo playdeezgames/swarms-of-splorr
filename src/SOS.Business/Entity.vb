@@ -125,6 +125,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property RestBenefit As Double Implements IEntity.RestBenefit
+        Get
+            Return _worldData.Entities(Id).RestBenefit
+        End Get
+    End Property
+
     Public Sub Move() Implements IEntity.Move
         _worldData.Entities(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Entities(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)
@@ -221,5 +227,11 @@
         _worldData.Entities(Id).XPValue -= XPGoal
         AddMessage($"{Name} gains a level!")
         _worldData.Entities(Id).Wounds = 0.0
+    End Sub
+
+    Public Sub Rest() Implements IEntity.Rest
+        Dim benefit = RNG.Roll(RestBenefit)
+        AddMessage($"{Name} rests and gains (up to){benefit.ToString("0.00")} health!")
+        _worldData.Entities(Id).Wounds = Math.Max(0.0, _worldData.Entities(Id).Wounds - benefit)
     End Sub
 End Class

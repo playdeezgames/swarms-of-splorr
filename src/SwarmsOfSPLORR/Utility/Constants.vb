@@ -7,6 +7,7 @@
     Friend Const NoText = "No"
     Friend Const OkText = "Ok"
     Friend Const QuitText = "Quit"
+    Friend Const RestText = "Rest"
     Friend Const StartText = "Start"
     Friend Const TakeText = "Take..."
     Friend Const YesText = "Yes"
