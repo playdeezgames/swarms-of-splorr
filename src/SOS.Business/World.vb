@@ -71,10 +71,10 @@ Public Class World
     End Sub
 
     Private Sub CreateEnemyEntities()
-        Const distanceStep = 10.0
+        Dim distanceStep = 10.0
         Dim distance As Double = distanceStep
         Dim random As New Random
-        For index = 1 To 100
+        For index = 1 To 1000
             Dim heading = random.NextDouble * Math.PI * 2
             CreateEntity(
             New EntityData() With
@@ -93,6 +93,7 @@ Public Class World
                 .Wounds = 0.0,
                 .XPValue = 1.0
             })
+            distanceStep *= 0.99
             distance += distanceStep
         Next
     End Sub
@@ -113,7 +114,7 @@ Public Class World
                 .MaximumDamage = 1.0,
                 .MaximumHealth = 10.0,
                 .Wounds = 0.0,
-                .RestBenefit = 1.0
+                .RestBenefit = 0.25
             })
     End Sub
 

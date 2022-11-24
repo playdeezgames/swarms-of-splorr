@@ -3,7 +3,8 @@
         New Dictionary(Of EntityType, Action(Of IWorld, IEntity)) From
         {
             {EntityType.Player, AddressOf PlayerTurnProcessor.Run},
-            {EntityType.Enemy, AddressOf EnemyTurnProcessor.Run}
+            {EntityType.Enemy, AddressOf EnemyTurnProcessor.Run},
+            {EntityType.XP, Sub(w, e) Return}
         }
     Friend Sub Run(world As IWorld)
         While world.PlayerEntity IsNot Nothing
