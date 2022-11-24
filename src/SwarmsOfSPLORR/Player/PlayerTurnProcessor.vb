@@ -11,7 +11,7 @@
             AnsiConsole.MarkupLine($"Speed: {entity.Speed.ToString("0.00")}")
             AnsiConsole.MarkupLine($"Health: {entity.Health.ToString("0.00")}/{entity.MaximumHealth.ToString("0.00")}")
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-            prompt.AddChoice(MoveText)
+            prompt.AddChoice(NextTurnText)
             If canAttack Then
                 prompt.AddChoice(AttackText)
             End If
@@ -29,7 +29,7 @@
                     ChangeHeadingProcessor.Run(world, entity)
                 Case ChangeSpeedText
                     ChangeSpeedProcessor.Run(world, entity)
-                Case MoveText
+                Case NextTurnText
                     MoveProcessor.Run(world, entity)
                     Exit Do
             End Select
