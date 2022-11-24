@@ -52,6 +52,18 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property VisiblePowerUps(entity As IEntity) As IEnumerable(Of IEntity) Implements IWorld.VisiblePowerUps
+        Get
+            Return Entities.Where(Function(x) x.EntityType <> EntityType.Enemy AndAlso x.EntityType <> EntityType.Player AndAlso x.DistanceFrom(entity) < entity.SightRadius)
+        End Get
+    End Property
+
+    Public ReadOnly Property TakeablePowerUps(entity As IEntity) As IEnumerable(Of IEntity) Implements IWorld.TakeablePowerUps
+        Get
+            Return Entities.Where(Function(x) x.EntityType <> EntityType.Enemy AndAlso x.EntityType <> EntityType.Player AndAlso x.DistanceFrom(entity) < entity.AttackRadius)
+        End Get
+    End Property
+
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         CreatePlayerEntity()
@@ -78,7 +90,8 @@ Public Class World
                 .AttackRadius = 1.0,
                 .MaximumDamage = 1.0,
                 .MaximumHealth = 1.0,
-                .Wounds = 0.0
+                .Wounds = 0.0,
+                .XPValue = 1.0
             })
             distance += distanceStep
         Next

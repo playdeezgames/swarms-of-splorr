@@ -106,6 +106,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property XPValue As Double Implements IEntity.XPValue
+        Get
+            Return _worldData.Entities(Id).XPValue
+        End Get
+    End Property
+
     Public Sub Move() Implements IEntity.Move
         _worldData.Entities(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Entities(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)
@@ -146,7 +152,10 @@
         _world.CreateEntity(New EntityData() With
                             {
                                 .Name = "XP",
-                                .EntityType = EntityType.XP
+                                .EntityType = EntityType.XP,
+                                .XPValue = RNG.Roll(XPValue),
+                                .X = X,
+                                .Y = Y
                             })
         _worldData.Entities(Id) = Nothing
         If _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = Id Then

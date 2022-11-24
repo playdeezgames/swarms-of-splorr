@@ -5,6 +5,8 @@
             ShowMessages(entity)
             ShowVisibleEnemies(world, entity)
             Dim canAttack = ShowAttackableEnemies(world, entity)
+            ShowVisiblePowerUps(world, entity)
+            Dim canTake = ShowTakeablePowerUps(world, entity)
             AnsiConsole.MarkupLine($"Name: {entity.Name}")
             AnsiConsole.MarkupLine($"Location: ({entity.X.ToString("0.00")},{entity.Y.ToString("0.00")})")
             AnsiConsole.MarkupLine($"Heading: {entity.Heading.ToString("0.00")}")
@@ -34,6 +36,30 @@
                     Exit Do
             End Select
         Loop
+    End Sub
+
+    Private Function ShowTakeablePowerUps(world As IWorld, entity As IEntity) As Object
+        Dim powerUps = world.TakeablePowerUps(entity)
+        If powerUps.Any Then
+            AnsiConsole.MarkupLine("[green]Takeable Power-Ups:[/]")
+            For Each powerUp In powerUps
+                AnsiConsole.MarkupLine($"- {powerUp.Name} (Distance: {powerUp.DistanceFrom(entity).ToString("0.00")}, Heading: {entity.HeadingTo(powerUp).ToString("0.00")})")
+            Next
+            AnsiConsole.WriteLine()
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Sub ShowVisiblePowerUps(world As IWorld, entity As IEntity)
+        Dim powerUps = world.VisiblePowerUps(entity)
+        If powerUps.Any Then
+            AnsiConsole.MarkupLine("[green]Visible Power-Ups:[/]")
+            For Each powerUp In powerUps
+                AnsiConsole.MarkupLine($"- {powerUp.Name} (Distance: {powerUp.DistanceFrom(entity).ToString("0.00")}, Heading: {entity.HeadingTo(powerUp).ToString("0.00")})")
+            Next
+            AnsiConsole.WriteLine()
+        End If
     End Sub
 
     Private Sub ShowVisibleEnemies(world As IWorld, entity As IEntity)
