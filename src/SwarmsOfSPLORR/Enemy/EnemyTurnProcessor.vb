@@ -4,6 +4,10 @@
         If target Is Nothing Then Return
         entity.Heading = entity.HeadingTo(target)
         entity.Speed = entity.MaximumSpeed
-        entity.Move()
+        If entity.DistanceFrom(target) < entity.AttackRadius Then
+            entity.Attack(target)
+        Else
+            entity.Move()
+        End If
     End Sub
 End Module

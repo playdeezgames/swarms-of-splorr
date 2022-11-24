@@ -77,7 +77,7 @@ Public Class World
                 .EntityType = EntityType.Enemy,
                 .AttackRadius = 1.0,
                 .MaximumDamage = 1.0,
-                .MaximumHealth = 10.0,
+                .MaximumHealth = 1.0,
                 .Wounds = 0.0
             })
             distance += distanceStep

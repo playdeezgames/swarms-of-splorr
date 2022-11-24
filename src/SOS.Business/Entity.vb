@@ -131,8 +131,8 @@
             AddMessage($"{Name} destroys {enemy.Name}.")
             enemy.Destroy()
         Else
-            AddMessage($"{enemy.Name} has {enemy.Health} health remaining.")
-            enemy.AddMessage($"{enemy.Name} has {enemy.Health} health remaining.")
+            AddMessage($"{enemy.Name} has {enemy.Health.ToString("0.00")} health remaining.")
+            enemy.AddMessage($"{enemy.Name} has {enemy.Health.ToString("0.00")} health remaining.")
         End If
     End Sub
 
@@ -142,6 +142,9 @@
 
     Public Sub Destroy() Implements IEntity.Destroy
         _worldData.Entities(Id) = Nothing
+        If _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = Id Then
+            _worldData.PlayerCharacterId = Nothing
+        End If
     End Sub
 
     Friend Shared Function FromId(worldData As WorldData, id As Integer?) As IEntity
