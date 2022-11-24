@@ -10,4 +10,5 @@
     ReadOnly Property VisiblePowerUps(entity As IEntity) As IEnumerable(Of IEntity)
     ReadOnly Property TakeablePowerUps(entity As IEntity) As IEnumerable(Of IEntity)
     Function CreateEntity(entityData As EntityData) As Integer
+    ReadOnly Property Statistic(statisticType As StatisticType) As Double
 End Interface

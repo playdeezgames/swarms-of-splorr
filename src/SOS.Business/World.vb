@@ -64,6 +64,15 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property Statistic(statisticType As StatisticType) As Double Implements IWorld.Statistic
+        Get
+            If _worldData.Statistics.ContainsKey(statisticType) Then
+                Return _worldData.Statistics(statisticType)
+            End If
+            Return 0.0
+        End Get
+    End Property
+
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         CreatePlayerEntity()

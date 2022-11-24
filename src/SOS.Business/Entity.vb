@@ -132,8 +132,19 @@
     End Property
 
     Public Sub Move() Implements IEntity.Move
+        AddStatistic(StatisticType.DistanceMoved, Speed)
         _worldData.Entities(Id).X += Speed * Math.Cos(Heading * Math.PI / 180.0)
         _worldData.Entities(Id).Y += Speed * Math.Sin(Heading * Math.PI / 180.0)
+    End Sub
+
+    Private Sub AddStatistic(statisticType As StatisticType, amount As Double)
+        If IsPlayer Then
+            If _worldData.Statistics.ContainsKey(statisticType) Then
+                _worldData.Statistics(statisticType) += amount
+            Else
+                _worldData.Statistics(statisticType) = amount
+            End If
+        End If
     End Sub
 
     Public Sub AddMessage(text As String) Implements IEntity.AddMessage
@@ -151,6 +162,7 @@
         AddMessage($"{Name} attacks {enemy.Name}!")
         enemy.AddMessage($"{enemy.Name} is attacked by {Name}!")
         Dim damage = RollDamage()
+        AddStatistic(StatisticType.DamageDone, damage)
         AddMessage($"{Name} does {damage.ToString("0.00")} damage to {enemy.Name}")
         enemy.AddMessage($"{enemy.Name} takes {damage.ToString("0.00")} damage from {Name}")
         enemy.AddWounds(damage)
@@ -204,6 +216,7 @@
     End Function
 
     Public Sub AddWounds(wounds As Double) Implements IEntity.AddWounds
+        AddStatistic(StatisticType.DamageTaken, wounds)
         _worldData.Entities(Id).Wounds = _worldData.Entities(Id).Wounds + wounds
     End Sub
 

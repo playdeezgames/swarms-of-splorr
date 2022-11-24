@@ -9,6 +9,7 @@
                     Dim world As IWorld = New World
                     world.Start()
                     PlayProcessor.Run(world)
+                    GameOverProcessor.Run(world)
                 Case QuitText
                     If ConfirmProcessor.Run("[red]Are you sure you want to quit?[/]") Then
                         Exit Do
